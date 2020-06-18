@@ -57,7 +57,7 @@ public class PlayersRepository {
 	}
 	
 	public List<Players> findAll() {
-		final String SQL = "SELECT id, teamId, playerName, position FROM players";
+		final String SQL = "SELECT id, teamId, playerName FROM players";
 		List<Players> playerList = new ArrayList<>();
 		
 		try {
@@ -71,7 +71,6 @@ public class PlayersRepository {
 						.id(rs.getInt(1))
 						.teamId(rs.getInt(2))
 						.playerName(rs.getString(3))
-						.position(rs.getString(4))
 						.build();
 				playerList.add(player);
 				System.out.println(TAG + "KBOTeam : " + player);
