@@ -23,11 +23,42 @@ public class PlayersRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	public List<Players> findPlayer(int id) {
+		System.out.println(TAG + "id : " + id);
+		final String SQL = "SELECT id, teamId , playerName, position FROM players WHERE id =? ";
+		List<Players> playerDetail = new ArrayList<>();
+		
+		try {
+			conn = DBconn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Players player = Players.builder()
+						.id(rs.getInt(1))
+						.teamId(rs.getInt(2))
+						.playerName(rs.getString(3))
+						.position(rs.getString(4))
+						.build();
+				playerDetail.add(player);
+				System.out.println(TAG + "KBOTeam : " + player);
+			}
+			return playerDetail;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findTeamPlayer : " + e.getMessage());
+		} finally {
+			DBconn.close(conn, pstmt, rs);
+		}
+		return null;
+	}
+	
 	public List<Players> findTeamPlayer(int teamId) {
 		System.out.println(TAG + "teamId : " + teamId);
 		final String SQL = "SELECT id, teamId , playerName, position FROM players WHERE teamId =? ";
 		List<Players> playerList = new ArrayList<>();
-		System.out.println(TAG + "playerList : " + playerList);
 		
 		try {
 			conn = DBconn.getConnection();
@@ -50,35 +81,6 @@ public class PlayersRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findTeamPlayer : " + e.getMessage());
-		} finally {
-			DBconn.close(conn, pstmt, rs);
-		}
-		return null;
-	}
-	
-	public List<Players> findAll() {
-		final String SQL = "SELECT id, teamId, playerName FROM players";
-		List<Players> playerList = new ArrayList<>();
-		
-		try {
-			conn = DBconn.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				Players player = Players.builder()
-						.id(rs.getInt(1))
-						.teamId(rs.getInt(2))
-						.playerName(rs.getString(3))
-						.build();
-				playerList.add(player);
-				System.out.println(TAG + "KBOTeam : " + player);
-			}
-			return playerList;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(TAG + "findAll : " + e.getMessage());
 		} finally {
 			DBconn.close(conn, pstmt, rs);
 		}

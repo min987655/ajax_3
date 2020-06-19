@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cos.ajax3.action.Action;
 import com.cos.ajax3.action.BaseballHomeAction;
+import com.cos.ajax3.action.PlayerDetailProcAction;
 import com.cos.ajax3.action.PlayerListProcAction;
 
 @WebServlet("/baseball")
@@ -40,6 +41,8 @@ public class BaseballController extends HttpServlet {
 			return new BaseballHomeAction();
 		} else if (cmd.equals("playerListProc")) {
 			return new PlayerListProcAction();
+		} else if (cmd.equals("playerDetailProc")) {
+			return new PlayerDetailProcAction();
 		}
 		return null;
 	} 
