@@ -7,7 +7,7 @@
 5. 선수 테이블 : id, 이름, 포지션 뿌리기
 ```
 
-## 오라클 사용자 생성
+### 오라클 사용자 생성
 ```sql
 alter session set "_ORACLE_SCRIPT"=true;
 CREATE USER cos IDENTIFIED BY bitc5600;
@@ -20,7 +20,7 @@ GRANT CREATE SEQUENCE to cos;
 ALTER user cos DEFAULT TABLESPACE users QUOTA UNLIMITED on users;
 ```
 
-## 테이블
+### 테이블
 ```sql
 CREATE TABLE kboteam(
 	id NUMBER primary key,
@@ -36,7 +36,7 @@ CREATE TABLE Players(
 );
 ```
 
-## DB 데이터(kboteam테이블)
+### DB 데이터(kboteam테이블)
 ```
 INSERT INTO kboteam VALUES(1, '두산');
 INSERT INTO kboteam VALUES(2, '키움');
@@ -50,7 +50,7 @@ INSERT INTO kboteam VALUES(9, '한화');
 INSERT INTO kboteam VALUES(10, '롯데');
 ```
 
-## DB 데이터(ㅔlayers테이블)
+### DB 데이터(players테이블)
 ```
 INSERT INTO Players VALUES(1, 1, '정수빈', '외야수');
 INSERT INTO Players VALUES(2, 1, '권혁', '투수');
